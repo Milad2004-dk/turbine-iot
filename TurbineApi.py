@@ -10,7 +10,7 @@ from email.mime.text import MIMEText
 app = Flask(__name__)
 CORS(app)
 app.config["SWAGGER"] = {
-    "title": "Wind Turbine IOT API",
+    "title": "Wind Turbine IOT API v2.0",
     "uiversion": 3,
 }
 swagger = Swagger(app)
