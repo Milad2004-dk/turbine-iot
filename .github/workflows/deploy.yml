@@ -20,4 +20,4 @@ jobs:
           password: ${{ secrets.VM_PASSWORD }}
           script_stop: false
           script: |
-            cd /home/Miho/turbine-iot && git pull && pip install -r requirements.txt --break-system-packages && (pkill -f TurbineApi.py || true) && nohup python3 TurbineApi.py > app.log 2>&1 & disown && sleep 2 && echo "OK"
+              cd /home/Miho/turbine-iot && git pull && pip install -r requirements.txt --break-system-packages && pkill -f TurbineApi.py || true && setsid nohup python3 TurbineApi.py > app.log 2>&1 < /dev/null & echo "OK"
