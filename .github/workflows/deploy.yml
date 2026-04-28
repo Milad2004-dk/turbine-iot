@@ -18,10 +18,13 @@ jobs:
           host: 51.103.212.67
           username: ${{ secrets.VM_USER }}
           password: ${{ secrets.VM_PASSWORD }}
+          request_pty: true
+          script_stop: false
           script: |
-            cd /home/Miho/turbine-iot && git pull
+            cd /home/Miho/turbine-iot
+            git pull
             pip install -r requirements.txt --break-system-packages
-            (pkill -f TurbineApi.py || true) && sleep 2
+            pkill -f TurbineApi.py || true
+            sleep 2
             nohup python3 TurbineApi.py > app.log 2>&1 &
-            disown $!
-            echo "Deploy done"
+            echo "Deploy færdig!"
