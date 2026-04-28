@@ -1,0 +1,26 @@
+name: Deploy til Azure VM
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout kode
+        uses: actions/checkout@v3
+
+      - name: Deploy til Azure VM via SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: 51.103.212.67
+          username: ${{ secrets.VM_USER }}
+          password: ${{ secrets.VM_PASSWORD }}
+          script: |
+            cd /home/turbineadmin/turbine-iot
+            git pull
+            pip install -r requirements.txt
+            pkill -f TurbineApi.py || true
+            nohup python TurbineApi.py > app.log 2>&1 &
