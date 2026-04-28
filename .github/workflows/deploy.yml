@@ -19,8 +19,8 @@ jobs:
           username: ${{ secrets.VM_USER }}
           password: ${{ secrets.VM_PASSWORD }}
           script: |
-            cd /home/turbineadmin/turbine-iot
+            cd /home/Miho/turbine-iot
             git pull
-            pip install -r requirements.txt
+            pip install -r requirements.txt --break-system-packages
             pkill -f TurbineApi.py || true
-            nohup python TurbineApi.py > app.log 2>&1 &
+            nohup python3 TurbineApi.py > app.log 2>&1 &
