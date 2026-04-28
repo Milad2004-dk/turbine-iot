@@ -22,5 +22,7 @@ jobs:
             cd /home/Miho/turbine-iot
             git pull
             pip install -r requirements.txt --break-system-packages
-            pkill -f TurbineApi.py || true
+            pkill -f TurbineApi.py; exit 0
+            sleep 2
             nohup python3 TurbineApi.py > app.log 2>&1 &
+            exit 0
