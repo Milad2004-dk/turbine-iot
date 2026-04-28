@@ -19,10 +19,9 @@ jobs:
           username: ${{ secrets.VM_USER }}
           password: ${{ secrets.VM_PASSWORD }}
           script: |
-            cd /home/Miho/turbine-iot
-            git pull
+            cd /home/Miho/turbine-iot && git pull
             pip install -r requirements.txt --break-system-packages
-            pkill -f TurbineApi.py || true
-            sleep 2
+            (pkill -f TurbineApi.py || true) && sleep 2
             nohup python3 TurbineApi.py > app.log 2>&1 &
-            disown
+            disown $!
+            echo "Deploy done"
