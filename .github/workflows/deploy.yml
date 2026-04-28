@@ -12,19 +12,12 @@ jobs:
       - name: Checkout kode
         uses: actions/checkout@v3
 
-      - name: Deploy til Azure VM via SSH
+      - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.0
         with:
           host: 51.103.212.67
           username: ${{ secrets.VM_USER }}
           password: ${{ secrets.VM_PASSWORD }}
-          request_pty: true
           script_stop: false
           script: |
-            cd /home/Miho/turbine-iot
-            git pull
-            pip install -r requirements.txt --break-system-packages
-            pkill -f TurbineApi.py || true
-            sleep 2
-            nohup python3 TurbineApi.py > app.log 2>&1 &
-            echo "Deploy færdig!"
+            cd /home/Miho/turbine-iot && git pull && pip install -r requirements.txt --break-system-packages && (pkill -f TurbineApi.py; nohup python3 TurbineApi.py > app.log 2>&1 & sleep 1) && echo "OK"
