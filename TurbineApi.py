@@ -33,8 +33,6 @@ def send_alarm_email(turbine_id, temp):
     receiver = os.environ.get('EMAIL_RECEIVER')
     password = os.environ.get('EMAIL_PASSWORD')
 
-    msg = MIMEText(f"ALARM! Turbine {turbine_id}...
-
     msg = MIMEText(f"ALARM! Turbine {turbine_id} er overophedet!\nTemperatur: {temp}°C overstiger grænse på 75°C!")
     msg['Subject'] = f'ALARM - Turbine {turbine_id} overophedet!'
     msg['From'] = sender
