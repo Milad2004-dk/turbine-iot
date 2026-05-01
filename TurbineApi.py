@@ -15,11 +15,13 @@ app.config["SWAGGER"] = {
 }
 swagger = Swagger(app)
 
+import os
+
 DB_CONFIG = {
-    'host': 'turbine-db.mysql.database.azure.com',
-    'user': 'turbineadmin',
-    'password': 'Turbine123!',
-    'database': 'turbinedb',
+    'host': os.environ.get('DB_HOST', 'turbine-db.mysql.database.azure.com'),
+    'user': os.environ.get('DB_USER', 'turbineadmin'),
+    'password': os.environ.get('DB_PASSWORD'),
+    'database': os.environ.get('DB_NAME', 'turbinedb'),
     'ssl_disabled': False
 }
 
@@ -27,10 +29,9 @@ def get_db():
     return mysql.connector.connect(**DB_CONFIG)
 
 
-def send_alarm_email(turbine_id, temp):
-    sender = "milad.honarjoo123456@gmail.com"
-    receiver = "milad.honarjoo123456@gmail.com"
-    password = "lkvatgfzgfzawhby"
+sender = os.environ.get('EMAIL_SENDER')
+receiver = os.environ.get('EMAIL_RECEIVER')
+password = os.environ.get('EMAIL_PASSWORD')
 
     msg = MIMEText(f"ALARM! Turbine {turbine_id} er overophedet!\nTemperatur: {temp}°C overstiger grænse på 75°C!")
     msg['Subject'] = f'ALARM - Turbine {turbine_id} overophedet!'
