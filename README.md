@@ -2,12 +2,12 @@
 
 En REST API til overvågning af vindmøller med automatisk temperatur-alarm system, bygget som del af Predictive Maintenance løsning for Intelligent IoT Solutions A/S.
 
-## 🚀 Live API
+##  Live API
 API'et kører live på Azure VM:
 - **Base URL:** `http://51.103.212.67:5001`
 - **Swagger UI:** `http://51.103.212.67:5001/apidocs`
 
-## ⚡ Funktioner
+##  Funktioner
 - Opret og administrer vindmøller
 - Modtag sensordata fra IoT enheder
 - Automatisk alarm hvis temperatur overstiger 75°C
@@ -15,7 +15,7 @@ API'et kører live på Azure VM:
 - Email notifikation til serviceteam ved alarm
 - CI/CD pipeline via GitHub Actions
 
-## 🛠️ Teknologier
+##  Teknologier
 | Teknologi | Formål |
 |---|---|
 | Python / Flask | REST API framework |
@@ -25,7 +25,7 @@ API'et kører live på Azure VM:
 | GitHub Actions | CI/CD deployment |
 | Docker | Containerisering |
 
-## 📦 Installation
+##  Installation
 
 ### Kør lokalt med Python
 ```bash
@@ -41,7 +41,7 @@ docker build -t turbine-iot .
 docker run -p 5001:5001 turbine-iot
 ```
 
-## 🔑 Environment Variables
+##  Environment Variables
 Opret følgende environment variables før du kører API'et:
 ```bash
 DB_HOST=din-database-host
@@ -63,7 +63,7 @@ GMAIL_PASSWORD=din-app-password
 | PUT | `/turbines/<id>` | Opdater vindmølle |
 | DELETE | `/turbines/<id>` | Slet vindmølle |
 
-## 🧪 Test med Postman
+##  Test med Postman
 Send et POST request til `/sensor-data`:
 ```json
 {
@@ -73,5 +73,5 @@ Send et POST request til `/sensor-data`:
 ```
 Returnerer `status: ALARM` hvis temperatur > 75°C
 
-## 🔄 CI/CD
+##  CI/CD
 Push til `main` branchen trigger automatisk deployment til Azure VM via GitHub Actions.
